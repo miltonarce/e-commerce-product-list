@@ -1,0 +1,22 @@
+{
+  "name": "e-commerce-product-list",
+  "version": "1.0.0",
+  "description": "E-commerce Product List with Details",
+  "main": "index.js",
+  "scripts": {
+    "client:dev": "cd client && npm run dev",
+    "server:dev": "cd server && npm run dev",
+    "dev": "concurrently \"npm run client:dev\" \"npm run server:dev\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

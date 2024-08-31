@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "This project was bootstrapped with Fastify-CLI.",
   "main": "app.js",
+  "type": "module",
   "exports": {
     "import": "./dist/index.js",
     "require": "./dist/index.js",
@@ -16,7 +17,7 @@
     "build": "tsc -p tsconfig.json",
     "start": "fastify start -l info app.js",
     "dev": "fastify start -w -l info -P app.js",
-    "lint": "eslint --ext .js,.ts,.jsx,.tsx --fix"
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",

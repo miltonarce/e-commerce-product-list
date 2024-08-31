@@ -13,8 +13,7 @@
     "lint:client": "cd client && npm run lint",
     "lint:server": "cd server && npm run lint",
     "lint": "npm run lint --workspace client && npm run lint --workspace server",
-    "pre-commit": "npm run lint",
-    "pre-push": "npm run build"
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,15 @@
+{
+  "extends": "fastify-tsconfig",
+  "compilerOptions": {
+     "outDir": "dist",
+     "declarationMap": true,
+     "composite": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "include": [
+     "./**/*.ts"
+  ]
+}

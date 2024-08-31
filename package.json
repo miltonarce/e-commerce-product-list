@@ -6,7 +6,15 @@
   "scripts": {
     "client:dev": "cd client && npm run dev",
     "server:dev": "cd server && npm run dev",
-    "dev": "concurrently \"npm run client:dev\" \"npm run server:dev\""
+    "dev": "concurrently \"npm run client:dev\" \"npm run server:dev\"",
+    "build": "npm run build --workspace client && npm run build --workspace server",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build --workspace server",
+    "lint:client": "cd client && npm run lint",
+    "lint:server": "cd server && npm run lint",
+    "lint": "npm run lint --workspace client && npm run lint --workspace server",
+    "precommit": "npm run lint",
+    "prepush": "npm run build"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +25,7 @@
     "server"
   ],
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "husky": "^9.1.5"
   }
 }

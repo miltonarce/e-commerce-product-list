@@ -9,5 +9,5 @@ module.exports = standard({
     endOfLine: "auto",
     printWidth: 100,
   },
-  ignores: ["node_modules", "dist", "build"],
+  ignores: ["node_modules", "dist", "build", ".tap"],
 });

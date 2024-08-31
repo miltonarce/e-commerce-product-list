@@ -16,7 +16,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node --test test/**/*.test.js",
+    "test": "tap --reporter=list test/**/*.test.js",
     "start": "fastify start -l info app.js",
     "dev": "fastify start -w -l info -P app.js",
     "lint": "eslint ."
@@ -31,6 +31,8 @@
   "devDependencies": {
     "eslint": "^9.9.1",
     "eslint-config-standard-ext": "^1.1.0",
-    "fastify-tsconfig": "^2.0.0"
+    "fastify-tsconfig": "^2.0.0",
+    "pino-pretty": "^11.2.2",
+    "tap": "^21.0.1"
   }
 }

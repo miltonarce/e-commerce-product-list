@@ -1,14 +1,17 @@
 {
   "name": "server",
+  "type": "module",
   "version": "1.0.0",
   "description": "This project was bootstrapped with Fastify-CLI.",
-  "main": "app.js",
-  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
   "exports": {
+    "types": "./dist/index.d.ts",
     "import": "./dist/index.js",
-    "require": "./dist/index.js",
-    "types": "./dist/index.d.ts" 
- },
+    "require": "./dist/index.js"
+  },
+  "main": "app.js",
   "directories": {
     "test": "test"
   },
@@ -19,9 +22,6 @@
     "dev": "fastify start -w -l info -P app.js",
     "lint": "eslint ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@fastify/autoload": "^5.0.0",
     "@fastify/sensible": "^5.0.0",

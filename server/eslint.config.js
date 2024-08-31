@@ -1,7 +1,6 @@
-import { standard } from "eslint-config-standard-ext";
+const { standard } = require("eslint-config-standard-ext");
 
-export default standard({
-  typescript: true,
+module.exports = standard({
   stylistic: {
     indent: 2,
     quotes: "double",

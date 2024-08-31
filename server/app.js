@@ -1,13 +1,12 @@
 "use strict";
-import path from "node:path";
+const path = require("node:path");
 
-import AutoLoad from "@fastify/autoload";
-import { type FastifyInstance } from "fastify";
+const AutoLoad = require("@fastify/autoload");
 
 // Pass --options via CLI arguments in command to enable these options.
 const options = {};
 
-module.exports = async function (fastify: FastifyInstance, opts: any) {
+module.exports = async function (fastify, opts) {
   // Place here your custom code!
 
   // Do not touch the following lines

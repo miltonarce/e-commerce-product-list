@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import PRODUCT_SERVICE from "@/services/products";
-import type { IProduct } from "@/types/product";
+import type { IAddNewProduct, IProduct } from "@/types/product";
 
 interface IProductProvider {
   children: React.ReactElement;
@@ -11,6 +11,7 @@ interface TProductContext {
   isLoading: boolean;
   error: any;
   searchById: (productId: number) => Promise<IProduct | null>;
+  addProduct: (newProduct: IAddNewProduct) => Promise<boolean>;
 }
 
 export const ProductContext = createContext<TProductContext>({
@@ -18,14 +19,34 @@ export const ProductContext = createContext<TProductContext>({
   isLoading: false,
   error: null,
   searchById: () => Promise.resolve(null),
+  addProduct: () => Promise.resolve(false),
 });
 
 export default function ProductProvider({
   children,
 }: IProductProvider) {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const addProduct = async (newProduct: IAddNewProduct) => {
+    setIsLoading(true);
+    try {
+      const { status, data } = await PRODUCT_SERVICE.addProduct(newProduct);
+      if (status === 201) {
+        setProducts((prevProducts: IProduct[]) => [...prevProducts, data]);
+        return true;
+      }
+      return false;
+    }
+    catch (error: any) {
+      setError(error.response.data.message || "Error adding product");
+      return false;
+    }
+    finally {
+      setIsLoading(false);
+    }
+  };
 
   const
     searchById = async (productId: number) => {
@@ -45,7 +66,7 @@ export default function ProductProvider({
       }
     };
 
-  const data = React.useMemo(() => ({ products, isLoading, error, searchById }), [products, isLoading, error]);
+  const data = React.useMemo(() => ({ products, isLoading, error, searchById, addProduct }), [products, isLoading, error]);
 
   useEffect(() => {
     const fetchProducts

@@ -7,9 +7,9 @@ interface IProductItem {
 }
 
 function ProductItem({ product }: IProductItem) {
-  const [_, setLocation] = useLocation();
+  const [_, navigate] = useLocation();
 
-  return (<div onClick={() => setLocation(`${ERoutes.PRODUCT}/${product.id}`)}>{product.name}</div>);
+  return (<div onClick={() => navigate(`${ERoutes.PRODUCT}/${product.id}`, { replace: true })}>{product.name}</div>);
 }
 
 export default ProductItem;

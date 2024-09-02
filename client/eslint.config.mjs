@@ -11,6 +11,9 @@ export default antfu({
     endOfLine: "auto",
     printWidth: 100,
   },
+  rules: {
+    "react-hooks/exhaustive-deps": "off",
+  },
   ignores: ["node_modules", "dist", "build"],
 },
 );

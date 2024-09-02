@@ -10,9 +10,15 @@ interface TProductContext {
   products: IProduct[] | null;
   isLoading: boolean;
   error: any;
+  searchById: (productId: number) => Promise<IProduct | null>;
 }
 
-export const ProductContext = createContext<TProductContext>({ products: null, isLoading: false, error: null });
+export const ProductContext = createContext<TProductContext>({
+  products: null,
+  isLoading: false,
+  error: null,
+  searchById: () => Promise.resolve(null),
+});
 
 export default function ProductProvider({
   children,
@@ -20,7 +26,26 @@ export default function ProductProvider({
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const data = React.useMemo(() => ({ products, isLoading, error }), [products, isLoading, error]);
+
+  const
+    searchById = async (productId: number) => {
+      setIsLoading(true);
+      try {
+        const { status, data } = await PRODUCT_SERVICE.getProductById(productId);
+        if (status === 200) {
+          return data;
+        }
+      }
+      catch (error: any) {
+        setError(error.response.data.message);
+        return null;
+      }
+      finally {
+        setIsLoading(false);
+      }
+    };
+
+  const data = React.useMemo(() => ({ products, isLoading, error, searchById }), [products, isLoading, error]);
 
   useEffect(() => {
     const fetchProducts

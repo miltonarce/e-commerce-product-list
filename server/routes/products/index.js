@@ -20,7 +20,7 @@ module.exports = async function (fastify, opts) {
     },
   }, async function (request, reply) {
     try {
-      const allProducts = products; //  products.getAll() from a database
+      const allProducts = await new Promise(resolve => setTimeout(() => resolve(products), 3000)); // Simulate a slow response getting all products
       reply.send(allProducts);
     } catch (error) {
       reply.code(500).send({ message: "Internal Server Error" });
@@ -46,15 +46,19 @@ module.exports = async function (fastify, opts) {
     try {
       const { id } = request.params;
 
-      const product = products.find(p => p.id === id);
+      const product = await new Promise(resolve => setTimeout(() => resolve(products.find(p => p.id === id)), 3000));
 
       if (!product) {
-        throw new Error("Product not found");
+        throw new Error(`Product with ID [${id}] not found`);
       }
 
       reply.send(product);
     } catch (error) {
-      reply.code(404).send({ message: error.message });
+      if (error.message.startsWith("Product with ID")) {
+        reply.code(404).send({ message: error.message });
+      } else {
+        reply.code(400).send({ message: "Bad Request" });
+      }
     }
   });
 
@@ -75,15 +79,14 @@ module.exports = async function (fastify, opts) {
     try {
       const { body } = request;
 
-      products.push(body);
+      await new Promise(resolve => setTimeout(() => {
+        products.push(body);
+        resolve();
+      }, 3000));
+
       reply.code(201).send(body);
     } catch (error) {
-      if (error.isJoi) {
-        reply.code(400).send({ message: error.details[0].message });
-      } else {
-        fastify.log.error(error);
-        reply.code(500).send({ message: "Internal Server Error" });
-      }
+      reply.code(500).send({ message: "Internal Server Error" });
     }
   });
 };

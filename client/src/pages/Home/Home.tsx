@@ -1,5 +1,11 @@
+import ProductFinder from "@/components/Product/ProductFinder";
+
 function Home() {
-  return (<div>Home</div>);
+  return (
+    <main>
+      <ProductFinder />
+    </main>
+  );
 }
 
 export default Home;

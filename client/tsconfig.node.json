@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2023"],
+    "jsx": "react-jsx",
+    "lib": ["ES2023", "dom", "dom.iterable"],
     "moduleDetection": "force",
     "module": "ESNext",
-
     /* Bundler mode */
     "moduleResolution": "bundler",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": ["node"],
     "allowImportingTsExtensions": true,
 
     /* Linting */
@@ -18,5 +22,5 @@
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "include": ["vite.config.ts"]
+  "include": ["vite.config.ts", "src", "public", "**/*.ts"]
 }

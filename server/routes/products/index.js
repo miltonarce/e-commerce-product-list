@@ -78,13 +78,14 @@ module.exports = async function (fastify, opts) {
   }, async (request, reply) => {
     try {
       const { body } = request;
+      const newProduct = { id: products.length + 1, ...body };
 
       await new Promise(resolve => setTimeout(() => {
-        products.push(body);
+        products.push(newProduct);
         resolve();
       }, 3000));
 
-      reply.code(201).send(body);
+      reply.code(201).send(newProduct);
     } catch (error) {
       reply.code(500).send({ message: "Internal Server Error" });
     }

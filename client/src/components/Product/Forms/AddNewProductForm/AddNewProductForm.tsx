@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useLocation } from "wouter";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useSnackbar } from "notistack";
 import type { IAddNewProduct } from "@/types/product";
 import useProductFinder from "@/hooks/useProductFinder";
 import { ERoutes } from "@/routes/definitions";
@@ -17,6 +18,7 @@ const schema = yup
 
 function AddNewProductForm() {
   const [_, navigate] = useLocation();
+  const { enqueueSnackbar } = useSnackbar();
   const { isLoading, error, addProduct } = useProductFinder();
   const {
     register,
@@ -27,6 +29,7 @@ function AddNewProductForm() {
   const onSubmit: SubmitHandler<IAddNewProduct> = async (data) => {
     const response = await addProduct(data);
     if (response) {
+      enqueueSnackbar("Product added successfully", { variant: "success" });
       navigate(ERoutes.HOME, { replace: true });
     };
   };

@@ -34,7 +34,7 @@ export default function ProductProvider({
     try {
       const { status, data } = await PRODUCT_SERVICE.addProduct(newProduct);
       if (status === 201) {
-        setProducts((prevProducts: IProduct[]) => [...prevProducts, data]);
+        setProducts((prevProducts: IProduct[]) => [data, ...prevProducts]);
         return true;
       }
       return false;

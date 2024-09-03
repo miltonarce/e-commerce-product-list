@@ -2,9 +2,7 @@ import ProductFinder from "@/components/Product/ProductFinder";
 
 function Home() {
   return (
-    <main>
-      <ProductFinder />
-    </main>
+    <ProductFinder />
   );
 }
 

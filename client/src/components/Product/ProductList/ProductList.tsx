@@ -19,7 +19,7 @@ function ProductList({ products, searchTerm }: IProductList) {
   });
 
   return (
-    <ul>
+    <ul className="my-6">
       {filteredProducts.map((p: IProduct) => (
         <li key={p.id}>
           <ProductItem product={p} />

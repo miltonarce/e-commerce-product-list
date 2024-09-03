@@ -1,7 +1,7 @@
 # E-commerce-product-list
 
 ## Project Overview
-This project is a monorepo built with npm workspaces. The frontend is located in the `client` folder and is developed using Vite, React, TypeScript, and Tailwind. The backend is located in the `server` folder and is built with Fastify. The project can be executed from the root directory by first running `npm install` and then `npm run dev`.
+This project is a monorepo built with npm workspaces. The frontend is located in the `client` folder and is developed using Vite, React, TypeScript, and Tailwind. The backend is located in the `server` folder and is built with Fastify. The project can be executed from the root directory by first running **`npm install`** and then **`npm run dev`**.
 
 Please note that the `.env` file has been included in the repository for easier setup, but in a real-world scenario, it should not be committed.
 

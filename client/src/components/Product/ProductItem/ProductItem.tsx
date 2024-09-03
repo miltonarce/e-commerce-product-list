@@ -7,11 +7,12 @@ import { classNames } from "@/utils/globals";
 
 interface IProductItem {
   product: IProduct;
+  overSize?: boolean;
 }
 
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
-function ProductItem({ product }: IProductItem) {
+function ProductItem({ product, overSize }: IProductItem) {
   const [_, navigate] = useLocation();
 
   const handleProductClick = () => {
@@ -19,29 +20,32 @@ function ProductItem({ product }: IProductItem) {
   };
 
   return (
-    <div onClick={handleProductClick} className="flex py-6 cursor-pointer bg-white shadow-md rounded px-4 py-2 mb-4">
+    <div
+      onClick={handleProductClick}
+      className={`flex py-6 cursor-pointer bg-white shadow-md rounded
+     px-4 py-2 mb-4 ${overSize && "min-h-[60vh]"}`}
+    >
       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
         <CpuChipIcon aria-hidden="true" className="h-full w-full object-cover object-center text-indigo-500" />
       </div>
 
       <div className="ml-4 flex flex-1 flex-col">
         <div className="mb-4">
-          <div className="flex justify-between text-base font-medium text-gray-900 mb-2">
-            <h2 onClick={handleProductClick} className="max-w-[300px] truncate ...">
+          <div className="flex flex-col justify-between text-base font-medium text-gray-900 mb-2 sm:flex-row">
+            <h2 onClick={handleProductClick} className={`${!overSize && "max-w-[200px] sm:max-w-[300px] truncate ..."}`}>
               {product.name}
             </h2>
-            <p className="ml-4">
+            <p className=" ml-0 sm:ml-4">
               $
-              {" "}
               {product.price}
             </p>
           </div>
-          <p className="text-sm text-gray-400 overflow-hidden line-clamp-2">
+          <p className={`text-sm text-gray-400 ${!overSize && "overflow-hidden line-clamp-2"}`}>
             {product.description}
           </p>
         </div>
         <div className="flex flex-1 items-end justify-between text-sm">
-          <div className="flex items-center">
+          <div className="items-center  hidden sm:flex">
             {[0, 1, 2, 3, 4].map(rating => (
               <StarIcon
                 key={rating}

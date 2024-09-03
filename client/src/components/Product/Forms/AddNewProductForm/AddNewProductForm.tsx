@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useLocation } from "wouter";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useSnackbar } from "notistack";
 import type { IAddNewProduct } from "@/types/product";
 import useProductFinder from "@/hooks/useProductFinder";
 import { ERoutes } from "@/routes/definitions";
@@ -17,6 +18,7 @@ const schema = yup
 
 function AddNewProductForm() {
   const [_, navigate] = useLocation();
+  const { enqueueSnackbar } = useSnackbar();
   const { isLoading, error, addProduct } = useProductFinder();
   const {
     register,
@@ -27,6 +29,7 @@ function AddNewProductForm() {
   const onSubmit: SubmitHandler<IAddNewProduct> = async (data) => {
     const response = await addProduct(data);
     if (response) {
+      enqueueSnackbar("Product added successfully", { variant: "success" });
       navigate(ERoutes.HOME, { replace: true });
     };
   };
@@ -73,7 +76,7 @@ function AddNewProductForm() {
           rows={3}
           placeholder="Add a description"
           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1
-          ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2"
+          ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 pl-2"
           {...register("description")}
         />
       </div>

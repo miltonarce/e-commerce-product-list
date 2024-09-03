@@ -29,7 +29,7 @@ function ProductFinder() {
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-80">
       <section>
-        <SearchInput value={value} onSearch={handleSearch} />
+        <SearchInput onSearch={handleSearch} />
       </section>
       <section>
         <ProductList products={products} searchTerm={value} />

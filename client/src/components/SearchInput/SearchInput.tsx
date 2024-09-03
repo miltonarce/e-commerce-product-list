@@ -1,11 +1,10 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 interface ISearchInput {
-  value: string;
   onSearch: (value: string) => void;
 }
 
-function SearchInput({ value, onSearch }: ISearchInput) {
+function SearchInput({ onSearch }: ISearchInput) {
   return (
     <div className="relative mt-2 rounded-md shadow-sm">
       <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -13,12 +12,11 @@ function SearchInput({ value, onSearch }: ISearchInput) {
       </div>
       <input
         type="text"
-        value={value}
         onChange={e => onSearch(e.target.value)}
         placeholder="Filter Product"
         className="block w-full rounded-md border-0 py-1.5 pl-10
       pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400
-      focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+      focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
       />
     </div>
   );

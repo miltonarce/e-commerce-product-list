@@ -20,7 +20,11 @@ module.exports = async function (fastify, opts) {
     },
   }, async function (request, reply) {
     try {
-      const allProducts = await new Promise(resolve => setTimeout(() => resolve(products), 3000)); // Simulate a slow response getting all products
+      const allProducts = await new Promise(resolve => setTimeout(() => {
+        const sortedProducts = products.sort((a, b) => b.id - a.id);
+        resolve(sortedProducts);
+      }, 3000)); // Simulate a slow response getting all products and sort them from last to first
+
       reply.send(allProducts);
     } catch (error) {
       reply.code(500).send({ message: "Internal Server Error" });

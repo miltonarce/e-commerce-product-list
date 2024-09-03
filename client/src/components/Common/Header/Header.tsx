@@ -54,7 +54,6 @@ function Header() {
                 src="https://digitalindigo.com.br/wp-content/uploads/2022/02/2-removebg-preview-2.png"
                 className="h-8 w-auto"
               />
-              <h1>E-commerce</h1>
             </Link>
             <button
               type="button"
